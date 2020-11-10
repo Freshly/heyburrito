@@ -26,6 +26,8 @@ class LocalStore {
         this.storedUsers = users;
         this.storedBots = bots;
 
+        log.info(bots)
+
         this.getBotUsername();
         return true;
     }
@@ -51,6 +53,8 @@ class LocalStore {
 
         if (!this.botId) {
             log.warn(`Could not found bot ${config.slack.bot_name} on slack account`);
+        } else {
+            log.info(`Found bot ${config.slack.bot_name} on slack account with id ${this.botId}`);
         }
     }
 }
