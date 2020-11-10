@@ -48,6 +48,7 @@ const config = {
         },
         slack: {
             bot_name: process.env.BOT_NAME || 'heyburrito',
+            bot_id: process.env.BOT_ID || "",
             api_token: mustHave('SLACK_API_TOKEN'),
             emojiInc: fixEmoji(process.env.SLACK_EMOJI_INC || ':burrito:'),
             emojiDec: fixEmoji(process.env.SLACK_EMOJI_DEC || ':rottenburrito:'),

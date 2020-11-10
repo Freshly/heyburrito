@@ -21,6 +21,16 @@ class Wbc {
 
         log.info('Fetching slack users via wbc');
         const result = await this.wbc.users.list();
+
+        const botIds = result.filter((x: any) => {
+          x.name === 'heyburrito'
+        });
+        if (botIds.length() === 0 && config.slack.bot_id.length() > 0) {
+          log.info('Hey no bots in result')
+          const ourBot = await this.wbc.users.info(config.slack.bot_id)
+          result.push(ourBot)
+        }
+
         result.members.forEach((x: any) => {
             // reassign correct array to arr
             const arr = x.is_bot ? bots : users;
