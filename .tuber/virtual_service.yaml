@@ -5,14 +5,12 @@ metadata:
 spec:
   hosts:
   - {{.clusterDefaultHost}}
+  - {{ .tuberAppName }}.{{.clusterDefaultHost}}
   gateways:
   - {{.clusterDefaultGateway}}
   http:
-  - match:
-    - uri:
-        prefix: /{{.tuberAppName}}
-    route:
+  - route:
     - destination:
         host: heyburrito-service
         port:
-          number: 80
+          number: 8080
