@@ -22,7 +22,7 @@ class Wbc {
         log.info('Fetching slack users via wbc');
         const result = await this.wbc.users.list();
 
-        const ourBot = await this.wbc.users.info(config.slack.bot_id)
+        const ourBot = await this.wbc.users.info({user: config.slack.bot_id})
         result.push(ourBot)
 
         result.members.forEach((x: any) => {
