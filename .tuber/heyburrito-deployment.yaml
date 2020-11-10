@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: heyburrito
+  name: heyburrito
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: heyburrito
+  template:
+    metadata:
+      labels:
+        app: heyburrito
+    spec:
+      containers:
+      - name: heyburrito
+        image: {{ .tuberImage }}
+        ports:
+        - containerPort: 3333
+        - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: {{ .tuberAppName }}-env

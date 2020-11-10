@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .tuberAppName }}-mongodb
+  name: {{ .tuberAppName }}-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .tuberAppName }}-mongodb
+  template:
+    metadata:
+      labels:
+        app: {{ .tuberAppName }}-mongodb
+    spec:
+      containers:
+      - args:
+        - mongod
+        image: mongo:3.4
+        name: mongodb
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - mountPath: /data/db/
+          name: mongodb-claim
+      nodeSelector:
+        dataClaim: {{ .tuberAppName }}
+      volumes:
+      - name: mongodb-claim
+        persistentVolumeClaim:
+          claimName: {{ .tuberAppName }}-mongodb-claim
