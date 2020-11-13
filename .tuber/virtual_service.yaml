@@ -4,7 +4,6 @@ metadata:
   name: heyburrito
 spec:
   hosts:
-  - {{.clusterDefaultHost}}
   - {{ .tuberAppName }}.{{.clusterDefaultHost}}
   gateways:
   - {{.clusterDefaultGateway}}
